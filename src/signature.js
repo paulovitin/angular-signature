@@ -100,21 +100,12 @@ angular.module('signature').directive('signaturePad', ['$interval', '$timeout', 
         });
         
         var calculateScale = function() {
-          var scaleWidth = Math.min(parent.clientWidth / width, 1);
-          var scaleHeight = Math.min(parent.clientHeight / height, 1);
+    
+          canvas.style.height = parent.clientHeight + "px";
+          canvas.style.width = parent.clientWidth + "px";
+          canvas.width = parent.clientWidth;
+          canvas.height = parent.clientHeight;
 
-          var newScale = Math.min(scaleWidth, scaleHeight);
-
-          if (newScale === scale) {
-            return;
-          }
-
-          var newWidth = width * newScale;
-          var newHeight = height * newScale;
-          canvas.style.height = Math.round(newHeight) + "px";
-          canvas.style.width = Math.round(newWidth) + "px";
-
-          scale = newScale;
           ctx.setTransform(1, 0, 0, 1, 0, 0);
           ctx.scale(1 / scale, 1 / scale);
         };
